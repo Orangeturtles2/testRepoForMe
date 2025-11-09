@@ -1,0 +1,135 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+button {
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* anchor to top so different form heights align by their top edge */
+  min-height: calc(100vh - 64px); /* account for fixed header */
+  padding-top: 48px; /* provide space under header and keep forms aligned */
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+}
+
+.login-form {
+  width: 380px;
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(6px);
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+  padding: 28px;
+  border: 1px solid rgba(221,82,149,0.08);
+  margin-top: 6px; /* small offset from top padding to avoid touching header */
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.login-title {
+  text-align: center;
+  color: #111; /* dark title when form has light/gray background */
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.login-type {
+  text-align: center;
+  color: #dd5295;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.user-input, .email-input, .password-input {
+  padding: 10px 12px;
+  margin: 0;
+  background-color: rgba(255,255,255,0.98);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 8px;
+  color: #111;
+  outline: none;
+}
+.user-input::placeholder, .password-input::placeholder {
+  color: rgba(0,0,0,0.5);
+}
+
+.submit-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 6px;
+}
+
+.submit {
+  padding: 10px 18px;
+  background-color: #dd5295;
+  color: white;
+  width: 60%;
+  border-radius: 8px;
+  font-weight: 700;
+  box-shadow: 0 6px 18px rgba(221,82,149,0.18);
+}
+
+.submit:hover {
+  filter: brightness(0.95);
+  cursor: pointer;
+}
+
+/* Auth link (Register <-> Login) - emphasize on register page
+   This will show as pink & bold which matches the site theme */
+.form-footer {
+  text-align: center;
+  color: rgba(0,0,0,0.8);
+  margin-top: 8px;
+}
+.form-footer .auth-link {
+  color: #ffbfdc; /* lighter pink */
+  font-weight: 700;
+  margin-left: 6px;
+  text-decoration: none;
+}
+.form-footer .auth-link:hover { text-decoration: underline; }
+.form-footer .auth-link:visited { color: #ffbfdc; }
+.form-footer .auth-link:active { color: #ffbfdc; }
+.form-footer .auth-link:focus { color: #ffbfdc; outline: none; }
+
+/* Centered large messages used across the app (loading, empty states) */
+.center-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 64px);
+  font-size: 1.6rem;
+  color: #111;
+}
+
