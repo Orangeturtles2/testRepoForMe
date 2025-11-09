@@ -1,41 +1,39 @@
 # Base image with Python and Node
 FROM python:3.11-slim
 
-# Install Node.js
+# Install Node.js and build tools
 RUN apt-get update && \
-    apt-get install -y curl build-essential && \
+    apt-get install -y curl build-essential libpq-dev gcc && \
     curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
     apt-get install -y nodejs && \
     apt-get clean
 
-# Install supervisor
-RUN apt-get install -y supervisor
-
-# Set working directories
+# Set working directory
 WORKDIR /app
 
-# Copy backend first
-COPY backend /app/backend
-WORKDIR /app/backend
+# -------------------
+# Build frontend
+# -------------------
+COPY frontend/package*.json frontend/
+RUN cd frontend && npm install
 
-RUN apt-get update && apt-get install -y libpq-dev gcc
+COPY frontend frontend
+RUN cd frontend && npm run build
 
-# Install backend dependencies
-COPY backend/requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# -------------------
+# Set up backend
+# -------------------
+COPY backend/requirements.txt backend/
+RUN pip install --no-cache-dir -r backend/requirements.txt
 
-# Copy frontend
-COPY frontend /app/frontend
-WORKDIR /app/frontend
+COPY backend backend
 
-# Install frontend dependencies
-RUN npm install
+# Expose a single port for Render
+ENV PORT=8000
+EXPOSE 8000
 
-# Copy supervisord config
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
-# Expose ports
-EXPOSE 8000 3000
-
-# Start supervisor
-CMD ["/usr/bin/supervisord"]
+# -------------------
+# CMD to run backend
+# Serve React build via FastAPI static files
+# -------------------
+CMD ["sh", "-c", "uvicorn backend.main:app --host 0.0.0.0 --port ${PORT}"]
