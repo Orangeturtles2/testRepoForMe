@@ -8,7 +8,7 @@ import os
 os.environ["TRANSFORMERS_NO_ADVISORY_WARNINGS"] = "true"
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "true"
 
-model = SentenceTransformer('all-MiniLM-L6-v2')
+model = SentenceTransformer('paraphrase-MiniLM-L3-v2')
 
 
 def flatten_user(user) -> str:
